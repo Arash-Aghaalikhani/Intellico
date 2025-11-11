@@ -17,15 +17,15 @@
 	<macrolist>
 		<macro id="nlheader">
 			<table border="0" class="header">
-				<tr border-bottom="3px solid" style="border-bottom: 3px solid;">
-					<td padding-bottom="5px" vertical-align="middle">
-						<#if preferences.subsidiaries>
-							${subsidiary.logo}
-						<#elseif companyinformation.logoUrl?length != 0>
+				  <tr border-bottom="3px solid" style="border-bottom: 3px solid;">
+                    <td padding-bottom="5px" vertical-align="middle">
+                        <#if preferences.subsidiaries>
+                            ${subsidiary.logo}
+                        <#elseif companyinformation.logoUrl?length != 0>
                             <@filecabinet nstype="image" src="${companyinformation.logoUrl}"/>
-						</#if>
-					</td>
-					<td padding-bottom="5px" align="right">
+                        </#if>
+                    </td>
+					<!-- <td padding-bottom="5px" align="right">
 						<p text-align="right">
 							<span style="font-size: 14px; font-weight: bold;">
 								<#if preferences.subsidiaries>
@@ -51,7 +51,7 @@
 								</#if>
 							</span>
 						</p>
-					</td>
+					</td> -->
 				</tr>
 				<#if !paymentlinktext.printinginhtml>
 					<tr style="height: 30px;">
@@ -150,8 +150,8 @@
 			line-height: 16px;
 		}
 		img {
-			height: 30px;
-			width: 114px;
+			height: 60px;
+			width: 180px;
 		}
 		a {
 			color: blue;
