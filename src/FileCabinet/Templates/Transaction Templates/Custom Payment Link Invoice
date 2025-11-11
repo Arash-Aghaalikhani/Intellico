@@ -18,17 +18,14 @@
 		<macro id="nlheader">
 			<table border="0" class="header">
 				  <tr>
-                    <td padding-bottom="5px" vertical-align="middle">
-                        <#if preferences.subsidiaries>
-                            ${subsidiary.logo}
-                        <#elseif companyinformation.logoUrl?length != 0>
-                            <@filecabinet nstype="image" src="${companyinformation.logoUrl}"/>
-                        </#if>
+                    <td padding-bottom="5px" vertical-align="middle"><img src="${companyInformation.logoUrl}"/>
                     </td>
-					<td padding-bottom="5px" align="right">
-						<p text-align="right">
+				</tr>
+				<tr padding-top="50px">
+				<td padding-bottom="5px" align="left">
+						<p text-align="left">
 							<br/>
-							<span style="font-size: 12px;">
+							<span style="font-size: 12px; font-weight: bold;">
 								<#if preferences.subsidiaries>
 									${subsidiary.mainaddress_text}
 								<#else>
@@ -191,7 +188,7 @@
 	<table style="width: 100%; margin-bottom: 5px; border-collapse: collapse; table-layout: fixed;">
 		<tr height="75px" class="document-header-row">
 			<td width="36%" vertical-align="top">
-				<p class="small-block-of-text">
+				<!-- <p class="small-block-of-text">
 					<#if paymentlinktext.printinginhtml>
 						<span style="font-size: 14px; font-weight: bold; line-height: 20px;">${record@title} #${record.tranid}</span><br/>
 					</#if>
@@ -200,27 +197,18 @@
 					${record.duedate@label}: ${nsformat_date(record.duedate)}
 					<br/>
 					${record.terms@label}: ${record.terms}
-				</p>
+				</p> -->
 			</td>
 			<td width="36%" vertical-align="top">
-				<p style="font-weight: bold;">
+				<!-- <p style="font-weight: bold;">
 					<span style="font-size: 14px; line-height: 20px;">${record.total@label}</span>
 					<br/>
 					<span style="font-size: 18px; line-height: 20px;">${record.currencysymbol} ${record.total?string[number_format]}</span>
-				</p>
-			</td>
-			<td rowspan="2" align="right" vertical-align="top">
-				<#if !paymentlinktext.printinginhtml && record.paymentlink?length != 0>
-					<barcode codetype="qrcode" value="${record.paymentlink}" height="120" width="120" class="background"></barcode>
-					<p style="font-size: 8px; line-height: 10px;" text-align="right" class="foreground">
-						<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-						${paymentlinktext.qrcodetext}
-					</p>
-				</#if>
+				</p> -->
 			</td>
 		</tr>
 		<tr height="75px" class="document-header-row">
-			<td width="38%">
+			<!-- <td width="38%">
 				<span style="font-weight: bold; font-size: 12px; line-height: 17px;">
 					${record.billaddress@label}:<br/>
 					<#if !record.entity.isperson>
@@ -232,11 +220,11 @@
 					</#if><br/>
 				</span>
 				<span class="small-block-of-text">${record.billaddress}</span>
-			</td>
-			<td width="38%">
+			</td> -->
+			<!-- <td width="38%">
 				<span style="font-weight: bold; font-size: 12px; line-height: 17px;">${record.shipaddress@label}:<br/></span>
 				<span class="small-block-of-text">${record.shipaddress}</span>
-			</td>
+			</td> -->
 		</tr>
 	</table>
 
