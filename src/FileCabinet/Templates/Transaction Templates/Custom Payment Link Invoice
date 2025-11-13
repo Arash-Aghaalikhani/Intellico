@@ -179,120 +179,100 @@
 		
 		<body header="nlheader" header-height="11%" footer="nlfooter" footer-height="95pt" padding="0.5in 0.5in 0.5in 0.5in" size="A4">
 			<table class="header"  >
-			<tr  >
-				<td padding-bottom="5px" align="left">
-					<p text-align="left">
-						<br/>
-						<span style="font-size: 12px; font-weight: bold;">
-							<#if preferences.subsidiaries>
-							${subsidiary.mainaddress_text}
-							<#else>
-							${companyinformation.addresstext}
+				<tr>
+					<td padding-bottom="5px" align="left">
+						<p text-align="left">
+							<br/>
+							<span style="font-size: 12px; font-weight: bold;">
+								<#if preferences.subsidiaries>
+								${subsidiary.mainaddress_text}
+								<#else>
+								${companyinformation.addresstext}
+								</#if>
+							</span>
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td width="55%" style="border: 1px solid red;" bgcolor="#f2f2f2"></td>
+					<td width="45%" style="border: 1px solid red;" bgcolor="#f2f2f2">
+						<table style="width:100%; border-collapse:collapse; font-size:11px; line-height:12px;">
+							<#if record.trandate?has_content>
+							<tr>
+								<td style="width:55%; text-align:left; padding:1px 3px;"><b>${record.trandate@label}</b></td>
+								<td style="width:45%; text-align:left; padding:1px 3px;">${record.trandate}</td>
+							</tr>
 							</#if>
-						</span>
-					</p>
+							<#if record.postingperiod?has_content>
+							<tr>
+								<td style="width:55%; text-align:left; padding:1px 3px;"><b>${record.postingperiod@label}</b></td>
+								<td style="width:45%; text-align:left; padding:1px 3px;">${record.postingperiod}</td>
+							</tr>
+							</#if>
+							<#if record.tranid?has_content>
+							<tr>
+								<td style="width:55%; text-align:left; padding:1px 3px;"><b>${record.tranid@label}</b></td>
+								<td style="width:45%; text-align:left; padding:1px 3px;">${record.tranid}</td>
+							</tr>
+							</#if>
+							<#if record.duedate?has_content>
+							<tr>
+								<td style="width:55%; text-align:left; padding:1px 3px;"><b>${record.duedate@label}</b></td>
+								<td style="width:45%; text-align:left; padding:1px 3px;">${record.duedate}</td>
+							</tr>
+							</#if>
+							<#if record.entity.vatregnumber?has_content>
+							<tr>
+								<td style="width:55%; text-align:left; padding:1px 3px;"><b>${record.entity.vatregnumber@label}</b></td>
+								<td style="width:45%; text-align:left; padding:1px 3px;">${record.entity.vatregnumber}</td>
+							</tr>
+							</#if>
+						</table>
+					</td>
+				</tr>
+			</table>
+
+			<!-- INVOICE SECTION -->
+			<table style="width:100%; border:1px solid #ff6600; border-collapse:collapse; margin-top:15px;">
+			<!-- Section title -->
+			<tr>
+				<td colspan="2" style="padding:8px 6px;">
+				<span style="font-size:14pt; font-weight:bold;">INVOICE</span>
 				</td>
 			</tr>
-			<tr  >
-				<td width="55%" style="border: 1px solid red;" bgcolor="#f2f2f2"></td>
-				<td width="45%" style="border: 1px solid red;" bgcolor="#f2f2f2">
-					<table style="width:100%; border-collapse:collapse; font-size:11px; line-height:12px;">
-						<#if record.trandate?has_content>
-						<tr>
-							<td style="width:55%; text-align:left; padding:1px 3px;"><b>${record.trandate@label}</b></td>
-							<td style="width:45%; text-align:left; padding:1px 3px;">${record.trandate}</td>
-						</tr>
-						</#if>
-						<#if record.postingperiod?has_content>
-						<tr>
-							<td style="width:55%; text-align:left; padding:1px 3px;"><b>${record.postingperiod@label}</b></td>
-							<td style="width:45%; text-align:left; padding:1px 3px;">${record.postingperiod}</td>
-						</tr>
-						</#if>
-						<#if record.tranid?has_content>
-						<tr>
-							<td style="width:55%; text-align:left; padding:1px 3px;"><b>${record.tranid@label}</b></td>
-							<td style="width:45%; text-align:left; padding:1px 3px;">${record.tranid}</td>
-						</tr>
-						</#if>
-						<#if record.duedate?has_content>
-						<tr>
-							<td style="width:55%; text-align:left; padding:1px 3px;"><b>${record.duedate@label}</b></td>
-							<td style="width:45%; text-align:left; padding:1px 3px;">${record.duedate}</td>
-						</tr>
-						</#if>
-						<#if record.entity.vatregnumber?has_content>
-						<tr>
-							<td style="width:55%; text-align:left; padding:1px 3px;"><b>${record.entity.vatregnumber@label}</b></td>
-							<td style="width:45%; text-align:left; padding:1px 3px;">${record.entity.vatregnumber}</td>
-						</tr>
-						</#if>
-					</table>
+			<tr>
+				<td colspan="2" style="border-bottom:1px solid #000000;"></td>
+			</tr>
+
+			<!-- Header row -->
+			<tr>
+				<td style="width:75%; border-bottom:1px solid #000000; padding:5px 6px; font-weight:bold; font-size:10pt;">
+				Description
+				</td>
+				<td style="width:25%; border-bottom:1px solid #000000; padding:5px 6px; font-weight:bold; font-size:10pt; text-align:right;">
+				Amount in EUR
+				</td>
+			</tr>
+
+			<!-- Line items (loop through items or custom lines) -->
+			<#list record.item as item>
+				<tr>
+				<td style="padding:4px 6px; font-size:9pt;">
+					${item.description}
+				</td>
+				<td style="padding:4px 6px; font-size:9pt; text-align:right;">
+					${item.amount}
+				</td>
+				</tr>
+			</#list>
+
+			<!-- Optional: Add special notes below items -->
+			<tr>
+				<td colspan="2" style="padding:4px 6px; font-size:9pt;">
+				Billing time zone: CET/CEST (GMT +1:00 / GMT +2:00)
 				</td>
 			</tr>
 			</table>
-			<#assign br_string="<br />
-			">
-			<#assign comma_space_string=", ">
-			<#assign number_format="#,##0.00">
-			<table style="width: 100%; margin-bottom: 5px; border-collapse: collapse;">
-			<tr height="75px" class="document-header-row">
-			<td width="36%" vertical-align="top">
-			<!-- <p class="small-block-of-text">
-				<#if paymentlinktext.printinginhtml>
-				<span style="font-size: 14px; font-weight: bold; line-height: 20px;">${record@title} #${record.tranid}</span>
-				<br/>
-				</#if>
-				${record.trandate@label}: ${nsformat_date(record.trandate)}
-				<br/>
-				${record.duedate@label}: ${nsformat_date(record.duedate)}
-				<br/>
-				${record.terms@label}: ${record.terms}
-			</p>
-			-->
-			</td>
-			<td width="36%" vertical-align="top">
-			<!-- <p style="font-weight: bold;">
-				<span style="font-size: 14px; line-height: 20px;">${record.total@label}</span>
-				<br/>
-				<span style="font-size: 18px; line-height: 20px;">${record.currencysymbol} ${record.total?string[number_format]}</span>
-			</p>
-			-->
-			</td>
-			</tr>
-			<tr height="75px" class="document-header-row">
-			<!-- <td width="38%">
-			<span style="font-weight: bold; font-size: 12px; line-height: 17px;">
-				${record.billaddress@label}:
-				<br/>
-				<#if !record.entity.isperson>
-				${record.entity.companyname}
-				<#else>
-				<#if record.entity.salutation?has_content>
-				${record.entity.salutation}
-				</#if>
-				<#if record.entity.firstname?has_content>
-				${record.entity.firstname}
-				</#if>
-				<#if record.entity.lastname?has_content>
-				${record.entity.lastname}
-				</#if>
-				</#if>
-				<br/>
-			</span>
-			<span class="small-block-of-text">${record.billaddress}</span>
-			</td>
-			-->
-			<!-- <td width="38%">
-			<span style="font-weight: bold; font-size: 12px; line-height: 17px;">
-				${record.shipaddress@label}:
-				<br/>
-			</span>
-			<span class="small-block-of-text">${record.shipaddress}</span>
-			</td>
-			-->
-			</tr>
-			</table>
-			
+
 		</body>
 	</pdf>
